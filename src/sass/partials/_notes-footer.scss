@@ -1,0 +1,23 @@
+@use '../abstracts/variables' as var;
+@use 'sass:map';
+
+.footer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-block: 3rem;
+  background-color: var.$secondary-color;
+  color: var.$primary-color;
+
+  font-size: 1.2rem;
+  align-items: center;
+
+  a {
+    font-weight: 700;
+    color: var.$bg-secondary-color;
+
+    &:hover {
+      color: var.$primary-color;
+    }
+  }
+}

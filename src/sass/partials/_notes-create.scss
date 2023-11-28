@@ -1,0 +1,74 @@
+@use '../abstracts/variables' as var;
+@use 'sass:map';
+
+.notes-create {
+  display: flex;
+  min-height: 350px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.8rem;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  form {
+    margin: 25px 0;
+    padding: 25px;
+    border: 1px solid var.$primary-color;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px var.$primary-color;
+
+    p {
+      display: flex;
+      justify-content: end;
+    }
+
+    input {
+      width: 100%;
+      margin-block: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      margin-block: 12px;
+      padding: 5px;
+    }
+
+    .description {
+      min-height: 120px;
+    }
+
+    .error-message {
+      display: flex;
+      justify-content: start;
+      color: red;
+    }
+
+    .success-message {
+      display: flex;
+      justify-content: start;
+      color: green;
+    }
+
+    button {
+      border: none;
+      border-radius: 5px;
+      padding: 12px;
+      background-color: var.$secondary-color;
+      color: var.$bg-secondary-color;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var.$primary-color;
+      }
+    }
+
+    .create-button {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

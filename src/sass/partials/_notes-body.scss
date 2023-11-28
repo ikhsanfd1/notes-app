@@ -1,0 +1,8 @@
+@use '../abstracts/variables' as var;
+@use 'sass:map';
+
+.notes-body {
+  display: grid;
+  color: var.$primary-color;
+  margin: 1rem 1.2rem;
+}

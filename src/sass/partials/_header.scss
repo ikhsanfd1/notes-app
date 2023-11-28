@@ -1,0 +1,24 @@
+@use '../abstracts/variables' as var;
+@use 'sass:map';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  align-items: center;
+  color: var.$primary-color;
+  border-bottom: 1px solid var.$primary-color;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  form {
+    input {
+      width: 250px;
+      border-radius: 5px;
+      padding: 12px;
+      border: none;
+    }
+  }
+}
