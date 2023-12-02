@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 import { useParams } from 'react-router-dom';
 
 const DetailPage = ({ notes, archived }) => {
@@ -27,6 +28,11 @@ const DetailPage = ({ notes, archived }) => {
       </p>
     </div>
   );
+};
+
+DetailPage.propType = {
+  notes: PropType.array.isRequired,
+  archived: PropType.array.isRequired,
 };
 
 export default DetailPage;

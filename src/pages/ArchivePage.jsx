@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropType from 'prop-types';
 import NotesArchive from '../components/body/NotesArchive';
 import { useNavigate } from 'react-router-dom';
 import NotesSearchHeader from '../components/header/NotesSearchHeader';
@@ -32,5 +33,12 @@ function ArchivePage({ archived, onDelete, onMoveToActive, onSearch }) {
     </div>
   );
 }
+
+ArchivePage.propType = {
+  archived: PropType.array.isRequired,
+  onDelete: PropType.func.isRequired,
+  onMoveToActive: PropType.func.isRequired,
+  onSearch: PropType.func.isRequired,
+};
 
 export default ArchivePage;

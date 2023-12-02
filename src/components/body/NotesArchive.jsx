@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropType from 'prop-types';
 import NotesArchiveList from './NotesArchiveList';
 
 function NotesArchive({
@@ -34,12 +34,12 @@ function NotesArchive({
   );
 }
 
-NotesArchive.propTypes = {
-  archived: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onMoveToActive: PropTypes.func.isRequired,
-  isHomePage: PropTypes.bool.isRequired,
-  searchQuery: PropTypes.string,
+NotesArchive.propType = {
+  archived: PropType.array.isRequired,
+  onDelete: PropType.func.isRequired,
+  onMoveToActive: PropType.func.isRequired,
+  isHomePage: PropType.bool.isRequired,
+  searchQuery: PropType.string,
 };
 
 export default NotesArchive;

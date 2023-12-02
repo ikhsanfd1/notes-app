@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropType from 'prop-types';
 import CreateButton from '../button/CreateButton';
 
 class NotesCreate extends React.Component {
@@ -92,10 +92,8 @@ class NotesCreate extends React.Component {
   }
 }
 
-NotesCreate.propTypes = {
-  addNotes: PropTypes.func.isRequired,
-  successMessage: PropTypes.string.isRequired,
-  clearSuccessMessage: PropTypes.func.isRequired,
+NotesCreate.propType = {
+  addNotes: PropType.func.isRequired,
 };
 
 export default NotesCreate;

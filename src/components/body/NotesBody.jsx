@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropType from 'prop-types';
 import NotesCreate from './NotesCreate';
 import NotesActive from './NotesActive';
 import NotesArchive from './NotesArchive';
@@ -93,16 +93,14 @@ class NotesBody extends React.Component {
   }
 }
 
-NotesBody.propTypes = {
-  searchQuery: PropTypes.string,
-  notes: PropTypes.array.isRequired,
-  archived: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onAddNotes: PropTypes.func.isRequired,
-  clearSuccessMessage: PropTypes.func.isRequired,
-  onArchive: PropTypes.func.isRequired,
-  onMoveToActive: PropTypes.func.isRequired,
-  successMessage: PropTypes.string,
+NotesBody.propType = {
+  searchQuery: PropType.string,
+  notes: PropType.array.isRequired,
+  archived: PropType.array.isRequired,
+  onDelete: PropType.func.isRequired,
+  onAddNotes: PropType.func.isRequired,
+  onArchive: PropType.func.isRequired,
+  onMoveToActive: PropType.func.isRequired,
 };
 
 export default NotesBody;

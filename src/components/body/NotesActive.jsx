@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropType from 'prop-types';
 import NotesActiveList from './NotesActiveList';
 import NotesSearchHeader from '../header/NotesSearchHeader';
 
@@ -21,11 +21,11 @@ function NotesActive({ notes, onDelete, onArchive, onSearch }) {
   );
 }
 
-NotesActive.propTypes = {
-  notes: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onArchive: PropTypes.func.isRequired,
-  onSearch: PropTypes.func.isRequired,
+NotesActive.propType = {
+  notes: PropType.array.isRequired,
+  onDelete: PropType.func.isRequired,
+  onArchive: PropType.func.isRequired,
+  onSearch: PropType.func.isRequired,
 };
 
 export default NotesActive;
