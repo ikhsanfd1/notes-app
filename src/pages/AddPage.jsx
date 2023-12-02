@@ -16,6 +16,8 @@ function AddPage({ onAddNotes, successMessage, clearSuccessMessage }) {
 
 AddPage.propType = {
   onAddNotes: PropType.func.isRequired,
+  successMessage: PropType.string.isRequired,
+  clearSuccessMessage: PropType.func.isRequired,
 };
 
 export default AddPage;
