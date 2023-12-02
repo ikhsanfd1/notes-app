@@ -2,23 +2,110 @@
 @use 'sass:map';
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr;
+  position: fixed;
+  padding-inline: 32px;
+  padding-block: 5px;
   color: var.$primary-color;
   border-bottom: 1px solid var.$primary-color;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  align-items: center;
+  background-color: var.$bg-primary-color;
 
+  &.scrolled {
+    background-color: var.$secondary-color;
+    border: 1px solid var.$bg-secondary-color;
+  }
   h1 {
     font-size: 2rem;
   }
 
-  form {
-    input {
-      width: 250px;
-      border-radius: 5px;
-      padding: 12px;
-      border: none;
+  .hmb-toggle {
+    display: none;
+    height: 25px;
+    z-index: 2;
+    text-decoration: none;
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    opacity: 1;
+    cursor: pointer;
+    z-index: 3;
+    color: var.$primary-color;
+    font-size: 25px;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+    list-style: none;
+    text-align: center;
+    gap: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var.$primary-color;
+    padding: 5px;
+    text-transform: uppercase;
+    padding-block: 15px 0;
+
+    &:hover {
+      background-color: var.$bg-secondary-color;
+      color: var.$primary-color;
+      transition: all 0.5s ease-out;
+      text-decoration: line-through;
+    }
+
+    &.active {
+      background-color: var.$bg-primary-color;
+    }
+  }
+}
+
+@media screen and (max-width: map.get(var.$breakpoints, 'lg')) {
+  html {
+    font-size: 80.5%;
+  }
+}
+
+@media screen and (max-width: map.get(var.$breakpoints, 'md')) {
+  html {
+    font-size: 68.5%;
+  }
+
+  .header {
+    justify-content: flex-end;
+    .hmb-toggle {
+      display: flex;
+      right: 0;
+      top: -10px;
+    }
+
+    ul {
+      display: flex;
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 50%;
+      height: 98vh;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+      background-color: var.$secondary-color;
+      z-index: 1;
+      transform: translateY(-100%);
+      transition: all 0.8s;
+      opacity: 0;
+
+      &.slide {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 }

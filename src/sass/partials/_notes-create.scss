@@ -4,6 +4,7 @@
 .notes-create {
   display: flex;
   min-height: 350px;
+  padding: 4.7rem;
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
@@ -57,7 +58,7 @@
       border: none;
       border-radius: 5px;
       padding: 12px;
-      background-color: var.$secondary-color;
+      background: var.$bg-mix-color;
       color: var.$bg-secondary-color;
       cursor: pointer;
 

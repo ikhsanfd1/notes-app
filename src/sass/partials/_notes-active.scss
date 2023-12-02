@@ -6,6 +6,20 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 10px;
   padding-bottom: 32px;
+  padding-top: 4.7rem;
+
+  .form-search {
+    width: 100%;
+    box-shadow: 1px 1px 1px 1px var.$primary-color;
+    border: 1px solid var.$primary-color;
+    border-radius: 5px;
+    input {
+      width: 100%;
+      border-radius: 5px;
+      padding: 12px;
+      border: none;
+    }
+  }
 
   h2 {
     grid-column: 1 / -1;
@@ -36,10 +50,11 @@
     .button-active {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
-      gap: 2px;
+      gap: 5px;
       box-sizing: border-box;
 
       button {
+        width: 100%;
         border: none;
         border-radius: 5px;
         padding: 12px;
@@ -94,5 +109,21 @@
         }
       }
     }
+  }
+}
+
+.nothing-notes {
+  padding-bottom: 20rem;
+}
+
+@media screen and (max-width: map.get(var.$breakpoints, 'lg')) {
+  html {
+    font-size: 80.5%;
+  }
+}
+
+@media screen and (max-width: map.get(var.$breakpoints, 'md')) {
+  html {
+    font-size: 68.5%;
   }
 }

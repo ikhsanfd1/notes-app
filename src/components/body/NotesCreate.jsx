@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CreateButton from '../button/CreateButton';
 
 class NotesCreate extends React.Component {
@@ -40,7 +41,7 @@ class NotesCreate extends React.Component {
       this.setState({
         errorMessage: 'Tidak boleh ada yang kosong!',
       });
-      return; // Hentikan proses jika ada kesalahan
+      return;
     }
 
     this.props.addNotes(this.state);
@@ -90,5 +91,11 @@ class NotesCreate extends React.Component {
     );
   }
 }
+
+NotesCreate.propTypes = {
+  addNotes: PropTypes.func.isRequired,
+  successMessage: PropTypes.string.isRequired,
+  clearSuccessMessage: PropTypes.func.isRequired,
+};
 
 export default NotesCreate;

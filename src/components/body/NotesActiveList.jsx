@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { showFormattedDate } from '../../utils/data';
+import PropTypes from 'prop-types';
+import { showFormattedDate } from '../../utils/index';
 import ButtonActive from '../button/ButtonActive';
 import DeleteConfirmModal from '../modal/DeleteConfirmModal';
 import ArchiveConfirmModal from '../modal/ArchiveConfirmModal';
@@ -78,5 +79,16 @@ function NotesActiveList({
     </div>
   );
 }
+
+NotesActiveList.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  createdAt: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  archived: PropTypes.bool.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+};
 
 export default NotesActiveList;

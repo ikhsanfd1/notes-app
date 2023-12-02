@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NotesCreate from './NotesCreate';
 import NotesActive from './NotesActive';
 import NotesArchive from './NotesArchive';
@@ -19,7 +20,6 @@ class NotesBody extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // Perbarui pencarian setiap kali searchQuery berubah
     if (this.props.searchQuery !== prevProps.searchQuery) {
       this.handleSearch(this.props.searchQuery);
     }
@@ -61,34 +61,48 @@ class NotesBody extends React.Component {
 
   render() {
     const { searchResult } = this.state;
-    const { notes, archived } = this.props;
+    const { notes, archived, searchQuery } = this.props;
 
     return (
       <div className="notes-body">
-        <NotesCreate
+        {/* <NotesCreate
           addNotes={this.onAddNotesHandler}
           successMessage={this.props.successMessage}
-        />
+        /> */}
         <NotesActive
+          onSearch={this.handleSearch}
           notes={searchResult ? searchResult : notes}
           onDelete={this.onDeleteHandler}
           onArchive={this.onArchiveHandler}
         />
 
-        {notes.length === 0 && archived.length === 0 && (
-          <p>Tidak ada catatan.</p>
+        {notes.length === 0 && (
+          <p className="nothing-notes">Tidak ada catatan.</p>
         )}
 
         <NotesArchive
-          archived={archived}
+          onSearch={this.handleSearch}
+          archived={searchResult ? searchResult : archived}
           onDelete={this.onDeleteHandler}
           onMoveToActive={this.onMoveToActive}
+          isHomePage={true}
+          searchQuery={searchQuery}
         />
-
-        {archived.length === 0 && <p>Tidak ada catatan terarsipkan.</p>}
       </div>
     );
   }
 }
+
+NotesBody.propTypes = {
+  searchQuery: PropTypes.string,
+  notes: PropTypes.array.isRequired,
+  archived: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onAddNotes: PropTypes.func.isRequired,
+  clearSuccessMessage: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onMoveToActive: PropTypes.func.isRequired,
+  successMessage: PropTypes.string,
+};
 
 export default NotesBody;

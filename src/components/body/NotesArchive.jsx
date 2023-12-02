@@ -1,21 +1,45 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NotesArchiveList from './NotesArchiveList';
 
-function NotesArchive({ archived, onDelete, onMoveToActive }) {
+function NotesArchive({
+  archived,
+  onDelete,
+  onMoveToActive,
+  isHomePage,
+  onSearch,
+  searchQuery,
+}) {
+  if (isHomePage) {
+    return null;
+  }
+
+  const filteredArchived = archived.filter((note) =>
+    note.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="notes-archive">
+    <>
       <h2>Archive</h2>
-      {archived.map((note) => (
+      {filteredArchived.map((note) => (
         <NotesArchiveList
           key={note.id}
           id={note.id}
-          onDelete={onDelete}
+          onDelete={() => onDelete(note.id, note, true)}
           onMoveToActive={onMoveToActive}
           {...note}
         />
       ))}
-    </div>
+    </>
   );
 }
+
+NotesArchive.propTypes = {
+  archived: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onMoveToActive: PropTypes.func.isRequired,
+  isHomePage: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
+};
 
 export default NotesArchive;
