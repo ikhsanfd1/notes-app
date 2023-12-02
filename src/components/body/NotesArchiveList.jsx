@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { showFormattedDate } from '../../utils/data';
+import PropType from 'prop-types';
+import { showFormattedDate } from '../../utils/index';
 import ButtonActive from '../button/ButtonActive';
 import DeleteConfirmModal from '../modal/DeleteConfirmModal';
 import MoveitConfirmModal from '../modal/MoveitConfirmModal';
@@ -58,7 +59,7 @@ function NotesArchiveList({
       <ButtonActive
         id={id}
         onDelete={handleDelete}
-        onArchive={handleMoveit} // Panggil onMoveToActive dengan ID sebagai argumen
+        onArchive={handleMoveit}
         isArchived={archived}
       />
 
@@ -78,5 +79,15 @@ function NotesArchiveList({
     </div>
   );
 }
+
+NotesArchiveList.propType = {
+  id: PropType.oneOfType([PropType.string, PropType.number]).isRequired,
+  title: PropType.string.isRequired,
+  body: PropType.string.isRequired,
+  createdAt: PropType.oneOfType([PropType.string, PropType.number]).isRequired,
+  archived: PropType.bool.isRequired,
+  onDelete: PropType.func.isRequired,
+  onMoveToActive: PropType.func.isRequired,
+};
 
 export default NotesArchiveList;

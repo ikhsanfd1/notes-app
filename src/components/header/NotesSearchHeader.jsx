@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class NotesSearchHeader extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class NotesSearchHeader extends React.Component {
 
   render() {
     return (
-      <form>
+      <form className="form-search">
         <input
           type="text"
           placeholder="Search notes ..."
@@ -29,5 +30,9 @@ class NotesSearchHeader extends React.Component {
     );
   }
 }
+
+NotesSearchHeader.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
 
 export default NotesSearchHeader;

@@ -1,112 +1,140 @@
-import React from 'react';
-import { getInitialData } from '../utils/data';
-import NotesHeader from './header/NotesHeader';
-import NotesBody from './body/NotesBody';
-import NotesFooter from './footer/NotesFooter';
+// NotesApp.jsx
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import {
+  getAllNotes,
+  deleteNote,
+  archiveNote,
+  unarchiveNote,
+  addNote,
+} from '../utils/data';
+import NotesHeader from '../components/header/NotesHeader';
+import NotesBody from '../components/body/NotesBody';
+import NotesFooter from '../components/footer/NotesFooter';
+import ArchivePage from '../pages/ArchivePage';
+import AddPage from '../pages/AddPage';
+import DetailPage from '../pages/DetailPage';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 
-class NotesApp extends React.Component {
-  constructor(props) {
-    super(props);
+const NotesApp = () => {
+  const navigate = useNavigate();
+  const [notes, setNotes] = useState(getAllNotes());
+  const [archived, setArchived] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-    this.state = {
-      notes: getInitialData(),
-      archived: [],
-      searchQuery: '', // Tambahkan searchQuery di state
-    };
-
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  handleSearch = (searchQuery) => {
-    this.setState({
-      searchQuery: searchQuery,
-    });
+  const handleSearch = (searchQuery) => {
+    setSearchQuery(searchQuery);
   };
 
-  // Fungsi-fungsi ini dipindahkan dari NotesBody agar state dapat dibagi dengan komponen lainnya
-  onDeleteHandler = (id, noteToMove) => {
-    this.setState((prevState) => ({
-      notes: prevState.notes.filter((note) => note.id !== id),
-      archived: noteToMove
-        ? prevState.archived.filter((note) => note.id !== id)
-        : prevState.archived,
-    }));
+  const onDeleteHandler = (id, noteToMove, isArchivePage) => {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+
+    if (isArchivePage) {
+      setArchived((prevArchived) =>
+        noteToMove
+          ? prevArchived.filter((note) => note.id !== id)
+          : prevArchived
+      );
+    }
   };
 
-  onAddNotesHandler = ({ title, body }) => {
-    this.setState(
-      (prevState) => ({
-        notes: [
-          ...prevState.notes,
-          {
-            id: +new Date(),
-            title,
-            body,
-            createdAt: +new Date(),
-            archived: false,
-          },
-        ],
-        successMessage: 'Note berhasil ditambahkan!',
-      }),
-      () => {
-        setTimeout(() => {
-          this.clearSuccessMessage();
-        }, 3000);
-      }
-    );
+  const onAddNotesHandler = ({ title, body }) => {
+    setNotes((prevNotes) => [
+      ...prevNotes,
+      {
+        id: +new Date(),
+        title,
+        body,
+        createdAt: +new Date(),
+        archived: false,
+      },
+    ]);
+    setSuccessMessage('Note berhasil ditambahkan!');
+    setTimeout(() => {
+      clearSuccessMessage();
+    }, 3000);
   };
 
-  clearSuccessMessage = () => {
-    this.setState({
-      successMessage: '',
-    });
+  const clearSuccessMessage = () => {
+    setSuccessMessage('');
   };
 
-  onArchiveHandler = (id) => {
-    const noteToArchive = this.state.notes.find((note) => note.id === id);
-
+  const onArchiveHandler = (id) => {
+    const noteToArchive = notes.find((note) => note.id === id);
     if (noteToArchive) {
-      // Tambahkan note ke dalam archived
-      this.setState((prevState) => ({
-        archived: [...prevState.archived, { ...noteToArchive, archived: true }],
-        notes: prevState.notes.filter((note) => note.id !== id), // Hapus dari notes
-      }));
+      setArchived((prevArchived) => [
+        ...prevArchived,
+        { ...noteToArchive, archived: true },
+      ]);
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
     }
   };
 
-  onMoveToActive = (id) => {
-    const noteToMove = this.state.archived.find((note) => note.id === id);
-
+  const onMoveToActive = (id) => {
+    const noteToMove = archived.find((note) => note.id === id);
     if (noteToMove) {
-      // Pindahkan note ke dalam notes
-      this.setState((prevState) => ({
-        notes: [...prevState.notes, { ...noteToMove, archived: false }],
-        archived: prevState.archived.filter((note) => note.id !== id), // Hapus dari archived
-      }));
+      setNotes((prevNotes) => [
+        ...prevNotes,
+        { ...noteToMove, archived: false },
+      ]);
+      setArchived((prevArchived) =>
+        prevArchived.filter((note) => note.id !== id)
+      );
     }
   };
 
-  render() {
-    const { notes, archived, searchQuery, successMessage } = this.state;
-
-    return (
-      <div className="notes-app">
-        <NotesHeader onSearch={this.handleSearch} />
-        <NotesBody
-          notes={notes}
-          archived={archived}
-          searchQuery={searchQuery}
-          onDelete={this.onDeleteHandler}
-          onAddNotes={this.onAddNotesHandler}
-          clearSuccessMessage={this.clearSuccessMessage}
-          onArchive={this.onArchiveHandler}
-          onMoveToActive={this.onMoveToActive}
-          successMessage={successMessage}
+  return (
+    <div className="notes-app">
+      <NotesHeader />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <NotesBody
+              onSearch={handleSearch}
+              notes={notes}
+              archived={archived}
+              searchQuery={searchQuery}
+              onDelete={onDeleteHandler}
+              onAddNotes={onAddNotesHandler}
+              clearSuccessMessage={clearSuccessMessage}
+              onArchive={onArchiveHandler}
+              onMoveToActive={onMoveToActive}
+              successMessage={successMessage}
+            />
+          }
         />
-        <NotesFooter />
-      </div>
-    );
-  }
-}
+        <Route
+          path="/archive"
+          element={
+            <ArchivePage
+              onSearch={handleSearch}
+              searchQuery={searchQuery}
+              archived={archived}
+              onDelete={onDeleteHandler}
+              onMoveToActive={onMoveToActive}
+            />
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <AddPage
+              onAddNotes={onAddNotesHandler}
+              successMessage={successMessage}
+              clearSuccessMessage={clearSuccessMessage}
+            />
+          }
+        />
+        <Route
+          path="/detail/:id"
+          element={<DetailPage notes={notes} archived={archived} />}
+        />
+      </Routes>
+      <NotesFooter />
+    </div>
+  );
+};
 
 export default NotesApp;

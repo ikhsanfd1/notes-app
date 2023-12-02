@@ -1,0 +1,37 @@
+@use '../abstracts/variables' as var;
+@use 'sass:map';
+
+.detail-page {
+  display: grid;
+  gap: 5px;
+  padding-top: 4.7rem;
+  margin-inline: 15px;
+  color: var.$primary-color;
+  font-size: 1.2rem;
+
+  .detail-catatan {
+    font-size: 1.7rem;
+    padding-block: 12px;
+  }
+
+  .detail-id {
+    padding-bottom: 22px;
+  }
+
+  .detail-title {
+    padding-block: 5px;
+    font-size: 1.5rem;
+  }
+
+  .detail-body {
+    padding-bottom: 22px;
+  }
+
+  .detail-date {
+    padding-block: 3px;
+  }
+
+  .detail-archive {
+    padding-bottom: 15rem;
+  }
+}

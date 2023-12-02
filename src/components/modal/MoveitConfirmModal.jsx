@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 
 function MoveitConfirmModal({ onConfirm, onCancel }) {
   return (
@@ -9,5 +10,10 @@ function MoveitConfirmModal({ onConfirm, onCancel }) {
     </div>
   );
 }
+
+MoveitConfirmModal.propType = {
+  onConfirm: PropType.func.isRequired,
+  onCancel: PropType.func.isRequired,
+};
 
 export default MoveitConfirmModal;
