@@ -1,6 +1,7 @@
-import React from 'react';
-import PropType from 'prop-types';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import NotesArchiveList from './NotesArchiveList';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 function NotesArchive({
   archived,
@@ -10,6 +11,12 @@ function NotesArchive({
   onSearch,
   searchQuery,
 }) {
+  const { language } = useLanguage();
+
+  useEffect(() => {
+    console.log(`Language is ${language}`);
+  }, [language]);
+
   if (isHomePage) {
     return null;
   }
@@ -20,7 +27,7 @@ function NotesArchive({
 
   return (
     <>
-      <h2>Archive</h2>
+      <h2>{language === 'id' ? 'Catatan Arsip' : 'Archive Notes'}</h2>
       {filteredArchived.map((note) => (
         <NotesArchiveList
           key={note.id}
@@ -34,12 +41,12 @@ function NotesArchive({
   );
 }
 
-NotesArchive.propType = {
-  archived: PropType.array.isRequired,
-  onDelete: PropType.func.isRequired,
-  onMoveToActive: PropType.func.isRequired,
-  isHomePage: PropType.bool.isRequired,
-  searchQuery: PropType.string,
+NotesArchive.propTypes = {
+  archived: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onMoveToActive: PropTypes.func.isRequired,
+  isHomePage: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
 };
 
 export default NotesArchive;

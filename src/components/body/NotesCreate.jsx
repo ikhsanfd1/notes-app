@@ -1,99 +1,105 @@
-import React from 'react';
-import PropType from 'prop-types';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import CreateButton from '../button/CreateButton';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-class NotesCreate extends React.Component {
-  constructor(props) {
-    super(props);
+function NotesCreate({ addNotes }) {
+  const { language } = useLanguage();
 
-    this.state = {
-      title: '',
-      body: '',
-      successMessage: '',
-      errorMessage: '',
-    };
+  const [state, setState] = React.useState({
+    title: '',
+    body: '',
+    successMessage: '',
+    errorMessage: '',
+  });
 
-    this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
-    this.onBodyChangeEventHandler = this.onBodyChangeEventHandler.bind(this);
-    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
-  }
-
-  onTitleChangeEventHandler(event) {
+  const onTitleChangeEventHandler = (event) => {
     const inputTitle = event.target.value;
     const truncatedTitle = inputTitle.slice(0, 50);
-    this.setState({
+    setState((prevState) => ({
+      ...prevState,
       title: truncatedTitle,
       errorMessage: '',
-    });
-  }
+    }));
+  };
 
-  onBodyChangeEventHandler(event) {
-    this.setState({
+  const onBodyChangeEventHandler = (event) => {
+    setState((prevState) => ({
+      ...prevState,
       body: event.target.value,
       errorMessage: '',
-    });
-  }
+    }));
+  };
 
-  onSubmitEventHandler(event) {
+  const onSubmitEventHandler = (event) => {
     event.preventDefault();
 
-    if (!this.state.title.trim() || !this.state.body.trim()) {
-      this.setState({
-        errorMessage: 'Tidak boleh ada yang kosong!',
-      });
+    if (!state.title.trim() || !state.body.trim()) {
+      setState((prevState) => ({
+        ...prevState,
+        errorMessage:
+          language === 'id'
+            ? 'Tidak boleh ada yang kosong!'
+            : 'Cannot be empty!',
+      }));
       return;
     }
 
-    this.props.addNotes(this.state);
+    addNotes(state);
 
-    this.setState({
-      successMessage: 'Note berhasil ditambahkan!',
+    setState({
+      successMessage:
+        language === 'id'
+          ? 'Note berhasil ditambahkan!'
+          : 'Note added successfully!',
       title: '',
       body: '',
     });
 
     setTimeout(() => {
-      this.setState({
+      setState((prevState) => ({
+        ...prevState,
         successMessage: '',
-      });
+      }));
     }, 3000);
-  }
+  };
 
-  render() {
-    const remainingCharacters = 50 - this.state.title.length;
+  const remainingCharacters = 50 - state.title.length;
 
-    return (
-      <div className="notes-create">
-        <h2>Create Notes</h2>
-        <form onSubmit={this.onSubmitEventHandler}>
-          <p>Sisa Karakter: {remainingCharacters}</p>
-          <input
-            type="text"
-            placeholder="Title"
-            value={this.state.title}
-            onChange={this.onTitleChangeEventHandler}
-          />
-          <textarea
-            className="description"
-            placeholder="Description"
-            value={this.state.body}
-            onChange={this.onBodyChangeEventHandler}
-          />
-          {this.state.errorMessage && (
-            <p className="error-message">{this.state.errorMessage}</p>
-          )}
-          {this.state.successMessage && (
-            <p className="success-message">{this.state.successMessage}</p>
-          )}
-          <CreateButton />
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div className="notes-create">
+      <h2>{language === 'id' ? 'Buat Catatan' : 'Create Notes'}</h2>
+      <form onSubmit={onSubmitEventHandler}>
+        <p>
+          {language === 'id' ? 'Sisa Karakter' : 'Remaining Characters'}:{' '}
+          {remainingCharacters}
+        </p>
+        <input
+          type="text"
+          placeholder={language === 'id' ? 'Judul' : 'Title'}
+          value={state.title}
+          onChange={onTitleChangeEventHandler}
+        />
+        <textarea
+          className="description"
+          placeholder={language === 'id' ? 'Deskripsi' : 'Description'}
+          value={state.body}
+          onChange={onBodyChangeEventHandler}
+        />
+        {state.errorMessage && (
+          <p className="error-message">{state.errorMessage}</p>
+        )}
+        {state.successMessage && (
+          <p className="success-message">{state.successMessage}</p>
+        )}
+        <CreateButton />
+      </form>
+    </div>
+  );
 }
 
-NotesCreate.propType = {
-  addNotes: PropType.func.isRequired,
+NotesCreate.propTypes = {
+  addNotes: PropTypes.func.isRequired,
 };
 
 export default NotesCreate;

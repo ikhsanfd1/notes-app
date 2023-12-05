@@ -1,13 +1,25 @@
-import React from 'react';
-import PropType from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import NotesActiveList from './NotesActiveList';
 import NotesSearchHeader from '../header/NotesSearchHeader';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 function NotesActive({ notes, onDelete, onArchive, onSearch }) {
+  const { language } = useLanguage();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [language]);
+
+  if (loading) {
+    return <p className="wait">Loading...</p>;
+  }
+
   return (
     <div className="notes-active">
       <NotesSearchHeader onSearch={onSearch} />
-      <h2>Notes Active</h2>
+      <h2>{language === 'id' ? 'Catatan Aktif' : 'Notes Active'}</h2>
       {notes.map((note) => (
         <NotesActiveList
           key={note.id}
@@ -21,11 +33,11 @@ function NotesActive({ notes, onDelete, onArchive, onSearch }) {
   );
 }
 
-NotesActive.propType = {
-  notes: PropType.array.isRequired,
-  onDelete: PropType.func.isRequired,
-  onArchive: PropType.func.isRequired,
-  onSearch: PropType.func.isRequired,
+NotesActive.propTypes = {
+  notes: PropTypes.array.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
 
 export default NotesActive;

@@ -3,9 +3,10 @@
 
 .header {
   display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
   position: fixed;
-  padding-inline: 32px;
+  padding-inline: 12px;
   padding-block: 5px;
   color: var.$primary-color;
   border-bottom: 1px solid var.$primary-color;
@@ -41,10 +42,10 @@
 
   ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+    gap: 2px;
     list-style: none;
     text-align: center;
-    gap: 5px;
   }
 
   a {
@@ -52,7 +53,7 @@
     color: var.$primary-color;
     padding: 5px;
     text-transform: uppercase;
-    padding-block: 15px 0;
+    padding: 17px 0;
 
     &:hover {
       background-color: var.$bg-secondary-color;
@@ -63,6 +64,57 @@
 
     &.active {
       background-color: var.$bg-primary-color;
+    }
+  }
+
+  .toggle-theme {
+    display: inline-block;
+    position: absolute;
+    left: 40%;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    border: none;
+    background: var.$secondary-color;
+    color: var.$primary-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var.$bg-secondary-color;
+    }
+  }
+
+  .language {
+    display: inline-block;
+    position: absolute;
+    right: 46%;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    border: none;
+    background: var.$secondary-color;
+    color: var.$primary-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var.$bg-secondary-color;
+    }
+  }
+
+  .logout {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    padding-block: 15px;
+    background: var.$secondary-color;
+    color: var.$primary-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var.$bg-secondary-color;
     }
   }
 }
