@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 function DeleteConfirmModal({ onConfirm, onCancel }) {
   return (
@@ -11,9 +11,9 @@ function DeleteConfirmModal({ onConfirm, onCancel }) {
   );
 }
 
-DeleteConfirmModal.propType = {
-  onConfirm: PropType.func.isRequired,
-  onCancel: PropType.func.isRequired,
+DeleteConfirmModal.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default DeleteConfirmModal;

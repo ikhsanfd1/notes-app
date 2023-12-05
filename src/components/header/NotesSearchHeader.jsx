@@ -1,35 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLanguage } from '../../contexts/LanguageContext';
 
-class NotesSearchHeader extends React.Component {
-  constructor(props) {
-    super(props);
+const NotesSearchHeader = ({ onSearch }) => {
+  const { language } = useLanguage();
 
-    this.state = {
-      searchQuery: '',
-    };
-  }
+  const [searchQuery, setSearchQuery] = React.useState('');
 
-  handleSearchChange = (event) => {
-    const searchQuery = event.target.value;
-    this.setState({ searchQuery });
-    this.props.onSearch(searchQuery);
+  const handleSearchChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    onSearch(query);
   };
 
-  render() {
-    return (
-      <form className="form-search">
-        <input
-          type="text"
-          placeholder="Search notes ..."
-          id="searchNotes"
-          value={this.state.searchQuery}
-          onChange={this.handleSearchChange}
-        />
-      </form>
-    );
-  }
-}
+  useEffect(() => {
+    // Dapatkan nilai bahasa saat komponen dimount
+    console.log(`Language is ${language}`);
+    // Lakukan sesuatu dengan nilai bahasa jika diperlukan
+  }, [language]);
+
+  return (
+    <form className="form-search">
+      <input
+        type="text"
+        placeholder={
+          language === 'id' ? 'Cari catatan ...' : 'Search notes ...'
+        }
+        id="searchNotes"
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
+    </form>
+  );
+};
 
 NotesSearchHeader.propTypes = {
   onSearch: PropTypes.func.isRequired,

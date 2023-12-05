@@ -142,7 +142,6 @@ table {
 
 body {
   font-family: "Jost", sans-serif;
-  background: linear-gradient(to left, #c6ffdd, #fbd786, #fbd786);
   overflow-x: hidden;
 }
 
@@ -153,6 +152,24 @@ main {
 .notes-app {
   display: grid;
   padding: 5px 20px;
+}
+.notes-app.light {
+  color: #231942;
+  background: linear-gradient(to left, #c6ffdd, #fbd786, #fbd786);
+}
+.notes-app.dark-theme {
+  color: #231942;
+  background: #f6f8fd;
+}
+
+.wait {
+  display: grid;
+  gap: 5px;
+  padding-top: 4.7rem;
+  margin-inline: 15px;
+  color: #231942;
+  font-size: 1.2rem;
+  padding-bottom: 30rem;
 }
 
 a,
@@ -176,9 +193,10 @@ textarea {
 }
 .header {
   display: grid;
-  grid-template-columns: 1.5fr 0.5fr;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
   position: fixed;
-  padding-inline: 32px;
+  padding-inline: 12px;
   padding-block: 5px;
   color: #231942;
   border-bottom: 1px solid #231942;
@@ -212,17 +230,17 @@ textarea {
 }
 .header ul {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+  gap: 2px;
   list-style: none;
   text-align: center;
-  gap: 5px;
 }
 .header a {
   text-decoration: none;
   color: #231942;
   padding: 5px;
   text-transform: uppercase;
-  padding-block: 15px 0;
+  padding: 17px 0;
 }
 .header a:hover {
   background-color: #f6f8fd;
@@ -232,6 +250,51 @@ textarea {
 }
 .header a.active {
   background-color: linear-gradient(to left, #c6ffdd, #fbd786, #fbd786);
+}
+.header .toggle-theme {
+  display: inline-block;
+  position: absolute;
+  left: 40%;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  border: none;
+  background: #f45b6a;
+  color: #231942;
+  cursor: pointer;
+}
+.header .toggle-theme:hover {
+  background-color: #f6f8fd;
+}
+.header .language {
+  display: inline-block;
+  position: absolute;
+  right: 46%;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  border: none;
+  background: #f45b6a;
+  color: #231942;
+  cursor: pointer;
+}
+.header .language:hover {
+  background-color: #f6f8fd;
+}
+.header .logout {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  padding-block: 15px;
+  background: #f45b6a;
+  color: #231942;
+  cursor: pointer;
+}
+.header .logout:hover {
+  background-color: #f6f8fd;
 }
 
 @media screen and (max-width: 992px) {
@@ -609,6 +672,108 @@ textarea {
 }
 .detail-page .detail-archive {
   padding-bottom: 15rem;
+}
+
+.register-page {
+  display: flex;
+  min-height: 350px;
+  padding: 4.7rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.8rem;
+  color: #231942;
+}
+.register-page h2 {
+  font-size: 1.5rem;
+}
+.register-page form {
+  margin: 25px 0;
+  padding: 25px;
+  border: 1px solid #231942;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px #231942;
+}
+.register-page form p {
+  display: flex;
+  justify-content: end;
+}
+.register-page form input {
+  width: 100%;
+  margin-block: 12px;
+}
+.register-page form button {
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  background: linear-gradient(to left, rgb(170, 170, 247), #f45b6a);
+  color: #f6f8fd;
+  cursor: pointer;
+}
+.register-page form button:hover {
+  background-color: #231942;
+}
+.register-page form .register-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.register-page a {
+  color: #f45b6a;
+  margin-bottom: 10rem;
+}
+.register-page a:hover {
+  color: #231942;
+}
+
+.login-page {
+  display: flex;
+  min-height: 350px;
+  padding: 4.7rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.8rem;
+  color: #231942;
+}
+.login-page h2 {
+  font-size: 1.5rem;
+}
+.login-page form {
+  margin: 25px 0;
+  padding: 25px;
+  border: 1px solid #231942;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px #231942;
+}
+.login-page form p {
+  display: flex;
+  justify-content: end;
+}
+.login-page form input {
+  width: 100%;
+  margin-block: 12px;
+}
+.login-page form button {
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  background: linear-gradient(to left, rgb(170, 170, 247), #f45b6a);
+  color: #f6f8fd;
+  cursor: pointer;
+}
+.login-page form button:hover {
+  background-color: #231942;
+}
+.login-page form .login-button {
+  display: flex;
+  justify-content: flex-end;
+}
+.login-page a {
+  color: #f45b6a;
+  margin-bottom: 15rem;
+}
+.login-page a:hover {
+  color: #231942;
 }
 
 /*# sourceMappingURL=main.css.map */

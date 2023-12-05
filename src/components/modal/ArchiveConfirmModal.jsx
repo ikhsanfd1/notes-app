@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 function ArchiveConfirmModal({ onConfirm, onCancel }) {
   return (
@@ -11,9 +11,9 @@ function ArchiveConfirmModal({ onConfirm, onCancel }) {
   );
 }
 
-ArchiveConfirmModal.propType = {
-  onConfirm: PropType.func.isRequired,
-  onCancel: PropType.func.isRequired,
+ArchiveConfirmModal.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
 };
 
 export default ArchiveConfirmModal;

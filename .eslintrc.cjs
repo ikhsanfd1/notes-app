@@ -39,6 +39,7 @@ module.exports = {
     'func-names': 'off',
     quotes: 'off',
     'react/jsx-no-target-blank': 'off',
+    'react-refresh/only-export-components': 'off',
     'no-alert': 'off',
     'prefer-const': 'off',
     'no-return-assign': 'off',

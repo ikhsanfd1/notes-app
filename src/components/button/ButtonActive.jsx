@@ -1,5 +1,5 @@
 import React from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function ButtonActive({ id, onDelete, onArchive, isArchived }) {
@@ -20,11 +20,11 @@ function ButtonActive({ id, onDelete, onArchive, isArchived }) {
   );
 }
 
-ButtonActive.propType = {
-  id: PropType.oneOfType([PropType.string, PropType.number]).isRequired,
-  onDelete: PropType.func.isRequired,
-  onArchive: PropType.func.isRequired,
-  isArchived: PropType.func.isRequired,
+ButtonActive.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
+  isArchived: PropTypes.bool.isRequired,
 };
 
 export default ButtonActive;

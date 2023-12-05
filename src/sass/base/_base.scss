@@ -9,8 +9,17 @@
 
 body {
   font-family: var.$primary-fonts;
-  background: var.$bg-primary-color;
   overflow-x: hidden;
+
+  // &.dark-theme {
+  //   color: var.$secondary-color;
+  //   background-color: #333;
+  // }
+
+  // &.light {
+  //   color: #333;
+  //   background: var.$bg-primary-color;
+  // }
 }
 
 main {
@@ -20,6 +29,26 @@ main {
 .notes-app {
   display: grid;
   padding: var.$padding-body;
+
+  &.light {
+    color: var.$primary-color;
+    background: var.$bg-primary-color;
+  }
+
+  &.dark-theme {
+    color: var.$primary-color;
+    background: var.$bg-secondary-color;
+  }
+}
+
+.wait {
+  display: grid;
+  gap: 5px;
+  padding-top: 4.7rem;
+  margin-inline: 15px;
+  color: var.$primary-color;
+  font-size: 1.2rem;
+  padding-bottom: 30rem;
 }
 
 a,
